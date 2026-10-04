@@ -1,12 +1,40 @@
 {
   "nota": "Hora de Madrid. El horario puede cambiar; los avisos se dan en Discord.",
   "dias": [
-    { "dia": "Lunes", "hora": "", "contenido": "" },
-    { "dia": "Martes", "hora": "", "contenido": "" },
-    { "dia": "Miércoles", "hora": "", "contenido": "" },
-    { "dia": "Jueves", "hora": "", "contenido": "" },
-    { "dia": "Viernes", "hora": "", "contenido": "" },
-    { "dia": "Sábado", "hora": "", "contenido": "" },
-    { "dia": "Domingo", "hora": "", "contenido": "" }
+    {
+      "dia": "Lunes",
+      "hora": "11:30 a 13:30 + 20:00 a 23:00",
+      "contenido": ""
+    },
+    {
+      "dia": "Martes",
+      "hora": "",
+      "contenido": ""
+    },
+    {
+      "dia": "Miércoles",
+      "hora": "",
+      "contenido": ""
+    },
+    {
+      "dia": "Jueves",
+      "hora": "",
+      "contenido": ""
+    },
+    {
+      "dia": "Viernes",
+      "hora": "",
+      "contenido": ""
+    },
+    {
+      "dia": "Sábado",
+      "hora": "",
+      "contenido": ""
+    },
+    {
+      "dia": "Domingo",
+      "hora": "",
+      "contenido": ""
+    }
   ]
 }
