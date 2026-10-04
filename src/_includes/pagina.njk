@@ -1,0 +1,8 @@
+---
+layout: base.njk
+---
+<article class="bloque estrecho">
+  <h1>{{ title }}</h1>
+  {% if imagen %}<img class="portada" src="{{ imagen }}" alt="">{% endif %}
+  <div class="texto">{{ content | safe }}</div>
+</article>

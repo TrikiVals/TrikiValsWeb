@@ -1,0 +1,15 @@
+---
+layout: base.njk
+title: Eventos
+---
+<section class="bloque">
+  <h1>Eventos</h1>
+  {% for grupo in [["abierto", "Inscripciones abiertas"], ["proximamente", "Próximamente"], ["cerrado", "Inscripciones cerradas"], ["finalizado", "Archivo"]] %}
+    {% set lista = collections.eventos | donde("estado", grupo[0]) %}
+    {% if lista.length %}
+    <h2 class="titular">{{ grupo[1] }}</h2>
+    <div class="rejilla">{% for e in lista %}<a class="tarjeta" href="{{ e.url }}"><strong>{{ e.data.title }}</strong>{% if e.data.resumen %}<span class="suave">{{ e.data.resumen }}</span>{% endif %}{% if e.data.fecha_evento %}<span class="suave pequeno">{{ e.data.fecha_evento | fecha }}</span>{% endif %}</a>{% endfor %}</div>
+    {% endif %}
+  {% endfor %}
+  {% if not collections.eventos.length %}<p class="suave">No hay eventos publicados.</p>{% endif %}
+</section>

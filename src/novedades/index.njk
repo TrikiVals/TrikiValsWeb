@@ -1,0 +1,9 @@
+---
+layout: base.njk
+title: Novedades
+permalink: /novedades/
+---
+<section class="bloque">
+  <h1>Novedades</h1>
+  <div class="rejilla">{% for item in collections.feed %}{% include "tarjeta.njk" %}{% endfor %}</div>
+</section>

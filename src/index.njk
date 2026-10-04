@@ -1,0 +1,47 @@
+---
+layout: base.njk
+---
+{% from "macros.njk" import heroe %}
+{{ heroe(inicio.titulo, inicio.subtitulo, inicio.imagen, inicio.boton_texto, inicio.boton_enlace) }}
+
+{% set abiertos = collections.eventos | donde("estado", "abierto") %}
+{% set pedidos = collections.merch | donde("estado", "abierto") %}
+{% if abiertos.length or pedidos.length %}
+<section class="bloque">
+  <h2 class="titular">Abierto ahora</h2>
+  <div class="rejilla">
+  {% for e in abiertos %}
+    <div class="tarjeta destacada"><span class="etiqueta">Evento · inscripciones</span><strong>{{ e.data.title }}</strong>
+    {% set cierre = e.data.cierre %}{% set texto_fin = "Inscripciones cerradas" %}{% include "cuenta.njk" %}
+    <a class="boton" href="{{ e.url }}">Ver evento</a></div>
+  {% endfor %}
+  {% for p in pedidos %}
+    <div class="tarjeta destacada"><span class="etiqueta">Merch · pedido abierto</span><strong>{{ p.data.title }}</strong>
+    {% set cierre = p.data.cierre %}{% set texto_fin = "Pedidos cerrados" %}{% include "cuenta.njk" %}
+    <a class="boton" href="{{ p.url }}">Ver producto</a></div>
+  {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="bloque partido">
+  <div>
+    <h2 class="titular izq">Novedades</h2>
+    <ul class="lista-novedades">
+    {% for item in collections.feed | limite(5) %}<li><a href="{{ item.data.destino or item.url }}"><strong>{{ item.data.title }}</strong><span>{{ item.data.tipo }} · {{ item.date | fecha }}</span></a></li>{% endfor %}
+    </ul>
+    <a class="boton" href="/novedades/">Ver todas</a>
+  </div>
+  {% if inicio.novedades_imagen %}<img class="redonda" src="{{ inicio.novedades_imagen }}" alt="">{% endif %}
+</section>
+{% if inicio.banda and inicio.banda.titulo %}{{ heroe(inicio.banda.titulo, inicio.banda.texto, inicio.banda.imagen, inicio.banda.boton, inicio.banda.enlace) | replace("<h1>", "<h2>") | replace("</h1>", "</h2>") | safe }}{% endif %}
+
+<section class="bloque">
+  <h2 class="titular">Explora</h2>
+  <div class="rejilla">
+    <a class="tarjeta grande" href="/historias/"><strong>Historias</strong><span class="suave">Novelas y universos, con su wiki.</span></a>
+    <a class="tarjeta grande" href="/directo/"><strong>Directo</strong><span class="suave">Horario, eventos, proyectos y descargas.</span></a>
+    <a class="tarjeta grande" href="/merch/"><strong>Merch</strong><span class="suave">Coleccionables y pedidos a precio de coste.</span></a>
+    <a class="tarjeta grande" href="/comunidad/"><strong>Comunidad</strong><span class="suave">Redes, apoyo y contacto.</span></a>
+  </div>
+</section>

@@ -1,0 +1,10 @@
+---
+layout: base.njk
+title: Series y proyectos
+---
+<section class="bloque">
+  <h1>Series y proyectos</h1>
+  <div class="rejilla">
+  {% for p in collections.proyectos %}<a class="tarjeta grande" href="{{ p.url }}"><strong>{{ p.data.title }}</strong>{% if p.data.resumen %}<span class="suave">{{ p.data.resumen }}</span>{% endif %}</a>{% endfor %}
+  </div>
+</section>

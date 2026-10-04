@@ -1,0 +1,11 @@
+{% macro heroe(titulo, texto, imagen, boton, enlace, pequeno) %}
+<section class="heroe{% if pequeno %} bajo{% endif %}">
+  {% if imagen %}<img class="fondo" src="{{ imagen }}" alt="">{% endif %}
+  <div class="velo"></div>
+  <div class="dentro">
+    {% if titulo %}<h1>{{ titulo }}</h1>{% endif %}
+    {% if texto %}<p>{{ texto }}</p>{% endif %}
+    {% if enlace %}<a class="boton claro" href="{{ enlace }}">{{ boton or "Ver más" }}</a>{% endif %}
+  </div>
+</section>
+{% endmacro %}

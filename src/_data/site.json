@@ -1,0 +1,43 @@
+{
+  "nombre": "TrikiVals",
+  "descripcion": "Historias, directos, eventos y descargas de TrikiVals.",
+  "correo": "trikivalsstreams@gmail.com",
+  "redes": [
+    {
+      "nombre": "Twitch",
+      "url": "https://www.twitch.tv/trikivals_",
+      "descripcion": "Red principal para contenido en directo"
+    },
+    {
+      "nombre": "YouTube",
+      "url": "https://www.youtube.com/@TrikiVals",
+      "descripcion": "Vídeos cortos y episodios de las series"
+    },
+    {
+      "nombre": "TikTok",
+      "url": "https://www.tiktok.com/@trikivals",
+      "descripcion": "Red principal para contenido de corta duración"
+    },
+    {
+      "nombre": "Discord",
+      "url": "https://discord.gg/mWKAHR2ukw",
+      "descripcion": "Servidor de la comunidad"
+    },
+    {
+      "nombre": "Instagram",
+      "url": "https://www.instagram.com/trikivals/",
+      "descripcion": "Red en la que también se publica contenido"
+    },
+    {
+      "nombre": "X",
+      "url": "https://x.com/TrikiVals",
+      "descripcion": "También se publica contenido, aunque en menos cantidad"
+    }
+  ],
+  "avatar": "https://framerusercontent.com/images/dpkoPWYxoaBgjAhKyD4PrYa6AA.jpg",
+  "logos": [
+    "https://framerusercontent.com/images/77sqGJenNeGeFE5v3yG14WRyvo.jpg",
+    "https://framerusercontent.com/images/Uzp9ttOcV6mBrwKXYFVfDw6wY.jpg",
+    "https://framerusercontent.com/images/5fBqrDWEwbTK80XddVoc54Ds8.jpg"
+  ]
+}

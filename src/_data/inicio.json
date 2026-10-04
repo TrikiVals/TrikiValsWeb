@@ -1,0 +1,15 @@
+{
+  "titulo": "¡Bienvenido!",
+  "subtitulo": "¡En esta web encontrarás todo el contenido creado por TrikiVals!",
+  "boton_texto": "",
+  "boton_enlace": "",
+  "imagen": "https://framerusercontent.com/images/z45PoO67XvplgkU0VRg7g4Q3R8.jpg",
+  "novedades_imagen": "https://framerusercontent.com/images/wVp8CmPkGcuSF0old6S5Ge7UpY.png",
+  "banda": {
+    "titulo": "¿Quieres ver el mapa de EL SURVIVAL?",
+    "texto": "Entra en el link y empieza a explorar",
+    "boton": "Mapa El Survival",
+    "enlace": "https://elsurvival.monsternodes.com",
+    "imagen": "https://framerusercontent.com/images/7Y8FF3TjW3PPZtSiT0kWpY22M.png"
+  }
+}

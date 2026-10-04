@@ -1,0 +1,14 @@
+---
+layout: base.njk
+title: Historias
+---
+{% from "macros.njk" import heroe %}
+{{ heroe("Historias", secciones.historias.texto, secciones.historias.imagen, "", "", true) }}
+<section class="bloque">
+
+  <div class="rejilla">
+  {% for u in collections.universos %}
+    <a class="tarjeta grande" href="{{ u.url }}"><span class="etiqueta">Universo</span><strong>{{ u.data.title }}</strong>{% if u.data.lema %}<span class="suave">{{ u.data.lema }}</span>{% endif %}</a>
+  {% endfor %}
+  </div>
+</section>

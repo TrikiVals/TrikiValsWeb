@@ -1,0 +1,271 @@
+# Panel de administración. Cambia SOLO la línea "repo" por tu usuario y repositorio de GitHub.
+backend:
+  name: github
+  repo: TrikiVals/TrikiValsWeb
+  branch: main
+
+media_folder: /src/assets/img
+public_folder: /assets/img
+
+collections:
+  - name: ajustes
+    label: Ajustes generales
+    files:
+      - name: inicio
+        label: Portada
+        file: src/_data/inicio.json
+        fields:
+          - { label: Título, name: titulo, widget: string }
+          - { label: Subtítulo, name: subtitulo, widget: text }
+          - { label: Texto del botón, name: boton_texto, widget: string, required: false }
+          - { label: Enlace del botón, name: boton_enlace, widget: string, required: false }
+          - { label: Imagen de cabecera, name: imagen, widget: image, required: false }
+          - { label: Imagen junto a las novedades, name: novedades_imagen, widget: image, required: false }
+          - label: Banda destacada (bajo las novedades)
+            name: banda
+            widget: object
+            fields:
+              - { label: "Título (vacío = sin banda)", name: titulo, widget: string, required: false }
+              - { label: Texto, name: texto, widget: string, required: false }
+              - { label: Texto del botón, name: boton, widget: string, required: false }
+              - { label: Enlace del botón, name: enlace, widget: string, required: false }
+              - { label: Imagen de fondo, name: imagen, widget: image, required: false }
+      - name: secciones
+        label: Cabeceras de sección
+        file: src/_data/secciones.json
+        fields:
+          - label: Historias
+            name: historias
+            widget: object
+            fields:
+              - { label: Texto, name: texto, widget: string, required: false }
+              - { label: Imagen de fondo, name: imagen, widget: image, required: false }
+          - label: Directo
+            name: directo
+            widget: object
+            fields:
+              - { label: Texto, name: texto, widget: string, required: false }
+              - { label: Imagen de fondo, name: imagen, widget: image, required: false }
+          - label: Descargas
+            name: descargas
+            widget: object
+            fields:
+              - { label: Texto, name: texto, widget: string, required: false }
+              - { label: Imagen de fondo, name: imagen, widget: image, required: false }
+          - label: Merch
+            name: merch
+            widget: object
+            fields:
+              - { label: Texto, name: texto, widget: string, required: false }
+              - { label: Imagen de fondo, name: imagen, widget: image, required: false }
+          - label: Comunidad
+            name: comunidad
+            widget: object
+            fields:
+              - { label: Texto, name: texto, widget: string, required: false }
+              - { label: Imagen de fondo, name: imagen, widget: image, required: false }
+      - name: horario
+        label: Horario de directos
+        file: src/_data/horario.json
+        fields:
+          - { label: Nota bajo el horario, name: nota, widget: string, required: false }
+          - label: Días
+            name: dias
+            widget: list
+            summary: "{{dia}} · {{hora}}"
+            fields:
+              - { label: Día, name: dia, widget: string }
+              - { label: "Hora (vacío = sin directo)", name: hora, widget: string, required: false }
+              - { label: Contenido, name: contenido, widget: string, required: false }
+      - name: site
+        label: Nombre, redes y contacto
+        file: src/_data/site.json
+        fields:
+          - { label: Nombre de la web, name: nombre, widget: string }
+          - { label: Descripción, name: descripcion, widget: text }
+          - { label: Correo de contacto, name: correo, widget: string }
+          - { label: Logo redondo del menú, name: avatar, widget: image, required: false }
+          - { label: Logotipos del pie, name: logos, widget: list, field: { label: Imagen, name: imagen, widget: image }, required: false }
+          - label: Redes
+            name: redes
+            widget: list
+            summary: "{{nombre}}"
+            fields:
+              - { label: Nombre, name: nombre, widget: string }
+              - { label: Enlace, name: url, widget: string }
+              - { label: Descripción, name: descripcion, widget: string, required: false }
+
+  - name: novedades
+    label: Novedades
+    label_singular: Novedad
+    folder: src/novedades
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [date, title]
+    fields:
+      - &titulo { label: Título, name: title, widget: string }
+      - &fecha { label: Fecha de publicación, name: date, widget: datetime, type: date }
+      - { label: Sección, name: seccion, widget: select, options: [General, Historias, Directo, Eventos, Descargas, Merch], default: General }
+      - &resumen { label: Resumen corto, name: resumen, widget: text, required: false }
+      - &imagen { label: Imagen, name: imagen, widget: image, required: false }
+      - &cuerpo { label: Contenido, name: body, widget: markdown, required: false }
+      - { label: Enlace del botón, name: enlace, widget: string, required: false }
+      - { label: Texto del botón, name: enlace_texto, widget: string, required: false }
+      - &acento { label: Color de acento solo para esta página, name: acento, widget: color, required: false }
+      - &css { label: CSS propio solo para esta página (avanzado), name: css, widget: code, default_language: css, output_code_only: true, allow_language_selection: false, required: false }
+
+  - name: eventos
+    label: Eventos
+    label_singular: Evento
+    folder: src/directo/eventos
+    create: true
+    fields:
+      - *titulo
+      - *fecha
+      - label: Estado
+        name: estado
+        widget: select
+        default: proximamente
+        options:
+          - { label: Próximamente, value: proximamente }
+          - { label: Inscripciones abiertas, value: abierto }
+          - { label: Inscripciones cerradas, value: cerrado }
+          - { label: Finalizado (archivo), value: finalizado }
+      - *resumen
+      - *imagen
+      - { label: Fecha y hora del evento, name: fecha_evento, widget: datetime, required: false }
+      - { label: Cierre de inscripciones (cuenta atrás), name: cierre, widget: datetime, required: false }
+      - { label: Enlace de inscripción, name: inscripcion, widget: string, required: false }
+      - { label: "Descripción, reglas y resultados", name: body, widget: markdown, required: false }
+      - &en_novedades { label: Mostrar en las novedades de la portada, name: en_novedades, widget: boolean, default: true, required: false }
+      - *acento
+      - *css
+
+  - name: proyectos
+    label: Series y proyectos
+    label_singular: Proyecto
+    folder: src/directo/proyectos
+    create: true
+    fields:
+      - *titulo
+      - { label: Orden, name: orden, widget: number, value_type: int, default: 9 }
+      - *resumen
+      - *imagen
+      - *cuerpo
+      - { label: Enlace del botón, name: enlace, widget: string, required: false }
+      - { label: Texto del botón, name: enlace_texto, widget: string, required: false }
+      - *acento
+      - *css
+
+  - name: descargas
+    label: Descargas
+    label_singular: Descarga
+    folder: src/directo/descargas
+    create: true
+    fields:
+      - *titulo
+      - { label: Categoría, name: categoria, widget: select, options: ["Mods, datapacks y texturas", "Mapas y schems", "Programas de ayuda", "Otros"] }
+      - { label: Descripción, name: resumen, widget: text }
+      - { label: Imagen cuadrada, name: imagen, widget: image, required: false }
+      - { label: Enlace de descarga, name: enlace, widget: string, required: false }
+      - { label: Versión, name: version, widget: string, required: false }
+      - { label: Tamaño, name: tamano, widget: string, required: false }
+      - { label: Última actualización, name: actualizado, widget: datetime, type: date, required: false }
+      - { label: Fecha de publicación (para novedades), name: date, widget: datetime, type: date, required: false }
+      - { label: Orden, name: orden, widget: number, value_type: int, default: 50 }
+      - *en_novedades
+
+  - name: merch
+    label: Merch
+    label_singular: Producto
+    folder: src/merch
+    create: true
+    fields:
+      - *titulo
+      - *fecha
+      - label: Estado
+        name: estado
+        widget: select
+        default: proximamente
+        options:
+          - { label: Próximamente, value: proximamente }
+          - { label: Pedido abierto, value: abierto }
+          - { label: Pedido cerrado, value: cerrado }
+          - { label: En producción, value: en_produccion }
+          - { label: Enviado, value: enviado }
+          - { label: Archivado, value: archivado }
+      - *resumen
+      - *imagen
+      - { label: Descripción y contenido, name: body, widget: markdown, required: false }
+      - { label: Precio del producto (€), name: precio_producto, widget: number, value_type: float, required: false }
+      - { label: Precio del envío (€), name: precio_envio, widget: number, value_type: float, required: false }
+      - { label: Tallas, name: tallas, widget: string, required: false }
+      - { label: Cierre de pedidos (cuenta atrás), name: cierre, widget: datetime, required: false }
+      - { label: Enlace al formulario de pedido, name: formulario, widget: string, required: false }
+      - *en_novedades
+      - *acento
+      - *css
+
+  - name: ateren_portada
+    label: "Ateren · Portada"
+    files:
+      - name: portada
+        label: Portada del universo
+        file: src/historias/ateren/index.md
+        fields:
+          - *titulo
+          - { label: Plantilla, name: layout, widget: hidden, default: universo.njk }
+          - { label: Orden, name: orden, widget: number, value_type: int, default: 1 }
+          - { label: Lema, name: lema, widget: string, required: false }
+          - *imagen
+          - *cuerpo
+          - *acento
+          - *css
+
+  - name: ateren_leer
+    label: "Ateren · Leer"
+    label_singular: Capítulo
+    folder: src/historias/ateren/leer
+    create: true
+    fields:
+      - *titulo
+      - *fecha
+      - { label: "Orden de lectura (0, 1, 2…)", name: orden, widget: number, value_type: int }
+      - { label: "Parte (Prólogo, Capítulo 1…)", name: parte, widget: string, required: false }
+      - *resumen
+      - *imagen
+      - { label: Texto, name: body, widget: markdown }
+      - *en_novedades
+      - *acento
+      - *css
+
+  - name: ateren_wiki
+    label: "Ateren · Wiki"
+    label_singular: Entrada
+    folder: src/historias/ateren/wiki
+    create: true
+    fields:
+      - *titulo
+      - { label: Categoría, name: categoria, widget: select, options: [Personajes, Lugares, Facciones, Cronología, Otros] }
+      - *resumen
+      - *imagen
+      - *cuerpo
+      - *acento
+      - *css
+
+  - name: paginas
+    label: Páginas sueltas
+    files:
+      - { name: sobre, label: Sobre TrikiVals, file: src/comunidad/sobre.md, fields: [*titulo, *imagen, *cuerpo, *acento, *css] }
+      - { name: apoyo, label: Apoyo y patrocinio, file: src/comunidad/apoyo.md, fields: [*titulo, *imagen, *cuerpo, *acento, *css] }
+      - { name: contacto, label: Contacto, file: src/comunidad/contacto.md, fields: [*titulo, *imagen, *cuerpo, *acento, *css] }
+      - name: interacciones
+        label: Interacciones
+        file: src/directo/interacciones.md
+        fields:
+          - *titulo
+          - { label: Plantilla, name: layout, widget: hidden, default: pagina.njk }
+          - *imagen
+          - *cuerpo
+          - *acento
+          - *css

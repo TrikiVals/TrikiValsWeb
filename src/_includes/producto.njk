@@ -1,0 +1,23 @@
+---
+layout: base.njk
+---
+<article class="bloque estrecho">
+  <p class="etiqueta">Merch · <span class="estado estado-{{ estado }}">{{ estado | estadoTxt }}</span></p>
+  <h1>{{ title }}</h1>
+  {% if imagen %}<img class="portada" src="{{ imagen }}" alt="">{% else %}<div class="hueco">Imagen del producto</div>{% endif %}
+  {% if resumen %}<p class="entrada">{{ resumen }}</p>{% endif %}
+  <div class="texto">{{ content | safe }}</div>
+  <h2>Precio de coste</h2>
+  <table class="desglose">
+    <tr><td>Producto</td><td>{{ precio_producto | euros }}</td></tr>
+    <tr><td>Envío</td><td>{{ precio_envio | euros }}</td></tr>
+    <tr class="total"><td>Total</td><td>{{ precio_producto | suma(precio_envio) | euros }}</td></tr>
+  </table>
+  <p class="suave">Pedido conjunto a precio de coste, sin beneficio. El pago se hace por enlace de PayPal.</p>
+  {% if tallas %}<p><strong>Tallas:</strong> {{ tallas }}</p>{% endif %}
+  {% if estado == "abierto" %}
+    {% set texto_fin = "Pedidos cerrados" %}{% include "cuenta.njk" %}
+    {% if formulario %}<p><a class="boton" href="{{ formulario }}">Apuntarme al pedido</a></p>{% endif %}
+  {% endif %}
+  <p><a href="/merch/">Todo el merch</a></p>
+</article>

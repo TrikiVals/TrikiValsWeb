@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if title %}{{ title }} · {% endif %}{{ site.nombre }}</title>
+<meta name="description" content="{{ resumen or site.descripcion }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600&display=swap">
+<link rel="stylesheet" href="/assets/estilo.css">
+{% if acento or css %}<style>{% if acento %}:root{--acento:{{ acento }}}{% endif %}{{ css | safe }}</style>{% endif %}
+</head>
+{% set zona = "inicio" %}
+{% if page.url.startsWith("/historias") %}{% set zona = "historias" %}{% elif page.url.startsWith("/directo") %}{% set zona = "directo" %}{% elif page.url.startsWith("/merch") %}{% set zona = "merch" %}{% elif page.url.startsWith("/comunidad") %}{% set zona = "comunidad" %}{% elif page.url.startsWith("/novedades") %}{% set zona = "inicio" %}{% endif %}
+<body data-seccion="{{ zona }}"{% if universo %} data-universo="{{ universo }}"{% endif %}>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera">
+  <a class="marca" href="/" aria-label="{{ site.nombre }}">{% if site.avatar %}<img src="{{ site.avatar }}" alt="">{% else %}{{ site.nombre }}{% endif %}</a>
+  <nav class="menu" aria-label="Principal">
+    <a href="/"{% if zona == "inicio" %} aria-current="page"{% endif %}>Inicio</a>
+    <a href="/historias/"{% if zona == "historias" %} aria-current="page"{% endif %}>Historias</a>
+    <a href="/directo/"{% if zona == "directo" %} aria-current="page"{% endif %}>Directo</a>
+    <a href="/merch/"{% if zona == "merch" %} aria-current="page"{% endif %}>Merch</a>
+    <a href="/comunidad/"{% if zona == "comunidad" %} aria-current="page"{% endif %}>Comunidad</a>
+  </nav>
+</header>
+{% if zona == "directo" %}
+<nav class="submenu" aria-label="Directo">
+  <a href="/directo/">Horario</a><a href="/directo/eventos/">Eventos</a><a href="/directo/proyectos/">Series y proyectos</a><a href="/directo/descargas/">Descargas</a><a href="/directo/interacciones/">Interacciones</a>
+</nav>
+{% elif zona == "comunidad" %}
+<nav class="submenu" aria-label="Comunidad">
+  <a href="/comunidad/">Redes</a><a href="/comunidad/sobre/">Sobre TrikiVals</a><a href="/comunidad/apoyo/">Apoyo</a><a href="/comunidad/contacto/">Contacto</a>
+</nav>
+{% elif universo %}
+<nav class="submenu" aria-label="Universo">
+  <a href="/historias/{{ universo }}/">Portada</a><a href="/historias/{{ universo }}/#leer">Leer</a><a href="/historias/{{ universo }}/#wiki">Wiki</a><a href="/historias/">Todos los universos</a>
+</nav>
+{% endif %}
+<main id="contenido">
+{{ content | safe }}
+</main>
+<footer class="pie">
+  <div class="rotulo">{{ site.nombre }}</div>
+  {% if site.logos %}<div class="logos">{% for l in site.logos %}<img src="{{ l }}" alt="">{% endfor %}</div>{% endif %}
+  <nav aria-label="Redes">{% for r in site.redes %}<a href="{{ r.url }}" rel="noopener">{{ r.nombre }}</a>{% endfor %}</nav>
+</footer>
+<script src="/assets/cuenta.js" defer></script>
+</body>
+</html>

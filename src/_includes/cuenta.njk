@@ -1,0 +1,6 @@
+{% if cierre %}
+<div class="cuenta" data-cierre="{{ cierre | iso }}" data-fin="{{ texto_fin or 'Plazo cerrado' }}">
+  <div><b data-u="d">--</b><span>días</span></div><div><b data-u="h">--</b><span>horas</span></div><div><b data-u="m">--</b><span>min</span></div><div><b data-u="s">--</b><span>seg</span></div>
+</div>
+<p class="suave pequeno">Cierre: {{ cierre | fechaHora }} (hora de Madrid)</p>
+{% endif %}

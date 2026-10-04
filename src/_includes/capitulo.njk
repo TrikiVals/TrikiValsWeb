@@ -1,0 +1,16 @@
+---
+layout: base.njk
+---
+<article class="bloque estrecho lectura">
+  <p class="etiqueta">{{ parte or "Capítulo" }}</p>
+  <h1>{{ title }}</h1>
+  {% if imagen %}<img class="portada" src="{{ imagen }}" alt="">{% endif %}
+  <div class="texto">{{ content | safe }}</div>
+  {% set lista = collections.capitulos | donde("universo", universo) %}
+  <nav class="pasos" aria-label="Capítulos">
+  {% for c in lista %}{% if c.url == page.url %}
+    {% if not loop.first %}<a href="{{ lista[loop.index0 - 1].url }}">← {{ lista[loop.index0 - 1].data.title }}</a>{% else %}<span></span>{% endif %}
+    {% if not loop.last %}<a href="{{ lista[loop.index0 + 1].url }}">{{ lista[loop.index0 + 1].data.title }} →</a>{% endif %}
+  {% endif %}{% endfor %}
+  </nav>
+</article>

@@ -1,0 +1,26 @@
+---
+layout: base.njk
+---
+{% from "macros.njk" import heroe %}
+{{ heroe(title, lema, imagen) }}
+<section class="bloque estrecho"><div class="texto">{{ content | safe }}</div></section>
+<section class="bloque" id="leer">
+  <h2 class="titular">Leer</h2>
+  <div class="rejilla">
+  {% for c in collections.capitulos | donde("universo", universo) %}
+    <a class="tarjeta" href="{{ c.url }}"><span class="etiqueta">{{ c.data.parte or "Capítulo" }}</span><strong>{{ c.data.title }}</strong>{% if c.data.resumen %}<span class="suave">{{ c.data.resumen }}</span>{% endif %}</a>
+  {% else %}<p class="suave">Aún no hay capítulos publicados.</p>{% endfor %}
+  </div>
+</section>
+<section class="bloque" id="wiki">
+  <h2 class="titular">Wiki</h2>
+  {% set entradas = collections.wiki | donde("universo", universo) %}
+  {% for cat in ["Personajes", "Lugares", "Facciones", "Cronología", "Otros"] %}
+    {% set grupo = entradas | donde("categoria", cat) %}
+    {% if grupo.length %}
+    <h3>{{ cat }}</h3>
+    <div class="rejilla">{% for w in grupo %}<a class="tarjeta" href="{{ w.url }}"><strong>{{ w.data.title }}</strong>{% if w.data.resumen %}<span class="suave">{{ w.data.resumen }}</span>{% endif %}</a>{% endfor %}</div>
+    {% endif %}
+  {% endfor %}
+  {% if not entradas.length %}<p class="suave">La wiki está en construcción.</p>{% endif %}
+</section>

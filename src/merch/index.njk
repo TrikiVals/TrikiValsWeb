@@ -1,0 +1,15 @@
+---
+layout: base.njk
+title: Merch
+---
+{% from "macros.njk" import heroe %}
+{{ heroe("Merch", secciones.merch.texto, secciones.merch.imagen, "", "", true) }}
+<section class="bloque">
+  {% for grupo in [["abierto", "Pedido abierto"], ["proximamente", "Próximamente"], ["cerrado", "Pedido cerrado"], ["en_produccion", "En producción"], ["enviado", "Enviado"], ["archivado", "Archivo"]] %}
+    {% set lista = collections.merch | donde("estado", grupo[0]) %}
+    {% if lista.length %}
+    <h2 class="titular">{{ grupo[1] }}</h2>
+    <div class="rejilla">{% for p in lista %}<a class="tarjeta grande" href="{{ p.url }}">{% if p.data.imagen %}<img src="{{ p.data.imagen }}" alt="">{% endif %}<strong>{{ p.data.title }}</strong>{% if p.data.resumen %}<span class="suave">{{ p.data.resumen }}</span>{% endif %}</a>{% endfor %}</div>
+    {% endif %}
+  {% endfor %}
+</section>

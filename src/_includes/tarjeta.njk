@@ -1,0 +1,6 @@
+<a class="tarjeta" href="{{ item.data.destino or item.url }}">
+  <span class="etiqueta">{{ item.data.tipo }}{% if item.data.seccion %} · {{ item.data.seccion }}{% endif %}</span>
+  <strong>{{ item.data.title }}</strong>
+  {% if item.data.resumen %}<span class="suave">{{ item.data.resumen }}</span>{% endif %}
+  <span class="suave pequeno">{{ item.date | fecha }}</span>
+</a>

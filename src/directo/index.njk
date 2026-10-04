@@ -1,0 +1,30 @@
+---
+layout: base.njk
+title: Directo
+---
+{% from "macros.njk" import heroe %}
+{{ heroe("Directo", secciones.directo.texto, secciones.directo.imagen, "", "", true) }}
+<section class="bloque">
+  <h2 class="titular">Horario de la semana</h2>
+  <div class="horario">
+  {% for d in horario.dias %}
+    <div><strong>{{ d.dia }}</strong><span>{{ d.hora or "Sin directo" }}</span>{% if d.contenido %}<span class="suave">{{ d.contenido }}</span>{% endif %}</div>
+  {% endfor %}
+  </div>
+  {% if horario.nota %}<p class="suave pequeno">{{ horario.nota }}</p>{% endif %}
+</section>
+<section class="bloque">
+  <h2 class="titular">Eventos</h2>
+  <div class="rejilla">
+  {% for e in collections.eventos | limite(3) %}
+    <a class="tarjeta" href="{{ e.url }}"><span class="etiqueta estado estado-{{ e.data.estado }}">{{ e.data.estado | estadoTxt }}</span><strong>{{ e.data.title }}</strong>{% if e.data.resumen %}<span class="suave">{{ e.data.resumen }}</span>{% endif %}</a>
+  {% else %}<p class="suave">No hay eventos publicados.</p>{% endfor %}
+  </div>
+</section>
+<section class="bloque">
+  <div class="rejilla">
+    <a class="tarjeta grande" href="/directo/proyectos/"><strong>Series y proyectos</strong><span class="suave">EL SURVIVAL, Triki Family Server y más.</span></a>
+    <a class="tarjeta grande" href="/directo/descargas/"><strong>Descargas</strong><span class="suave">Mods, texturas, mapas y programas.</span></a>
+    <a class="tarjeta grande" href="/directo/interacciones/"><strong>Interacciones</strong><span class="suave">Coleccionables por bits y beneficios de suscriptor.</span></a>
+  </div>
+</section>

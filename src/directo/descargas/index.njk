@@ -1,0 +1,25 @@
+---
+layout: base.njk
+title: Descargas
+permalink: /directo/descargas/
+---
+{% from "macros.njk" import heroe %}
+{{ heroe("", secciones.descargas.texto, secciones.descargas.imagen, "", "", false) }}
+<section class="bloque">
+  {% for cat in ["Mods, datapacks y texturas", "Mapas y schems", "Programas de ayuda", "Otros"] %}
+    {% set lista = collections.descargas | donde("categoria", cat) %}
+    {% if lista.length %}
+    <h2 class="titular">{{ cat }}</h2>
+    <div class="rejilla">
+    {% for d in lista %}
+      <div class="tarjeta">{% if d.data.imagen %}<img src="{{ d.data.imagen }}" alt="">{% endif %}
+        <strong>{{ d.data.title }}</strong>
+        <span class="suave">{{ d.data.resumen }}</span>
+        <span class="suave pequeno">{% if d.data.version %}Versión {{ d.data.version }}{% endif %}{% if d.data.tamano %} · {{ d.data.tamano }}{% endif %}{% if d.data.actualizado %} · Actualizado {{ d.data.actualizado | fecha }}{% endif %}</span>
+        {% if d.data.enlace %}<a class="boton" href="{{ d.data.enlace }}" rel="noopener">Descargar</a>{% else %}<span class="suave">Enlace pendiente</span>{% endif %}
+      </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+  {% endfor %}
+</section>

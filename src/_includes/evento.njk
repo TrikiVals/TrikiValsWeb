@@ -1,0 +1,16 @@
+---
+layout: base.njk
+---
+<article class="bloque estrecho">
+  <p class="etiqueta">Evento · <span class="estado estado-{{ estado }}">{{ estado | estadoTxt }}</span></p>
+  <h1>{{ title }}</h1>
+  {% if imagen %}<img class="portada" src="{{ imagen }}" alt="">{% endif %}
+  {% if resumen %}<p class="entrada">{{ resumen }}</p>{% endif %}
+  {% if fecha_evento %}<p><strong>Fecha del evento:</strong> {{ fecha_evento | fechaHora }} (hora de Madrid)</p>{% endif %}
+  {% if estado == "abierto" %}
+    {% set texto_fin = "Inscripciones cerradas" %}{% include "cuenta.njk" %}
+    {% if inscripcion %}<p><a class="boton" href="{{ inscripcion }}">Inscribirme</a></p>{% endif %}
+  {% endif %}
+  <div class="texto">{{ content | safe }}</div>
+  <p><a href="/directo/eventos/">Todos los eventos</a></p>
+</article>

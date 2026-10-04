@@ -1,0 +1,11 @@
+---
+layout: base.njk
+title: Comunidad
+---
+{% from "macros.njk" import heroe %}
+{{ heroe("Redes", secciones.comunidad.texto, secciones.comunidad.imagen, "", "", true) }}
+<section class="bloque">
+  <div class="rejilla">
+  {% for r in site.redes %}<a class="tarjeta grande" href="{{ r.url }}" rel="noopener"><strong>{{ r.nombre }}</strong><span class="suave">{{ r.descripcion }}</span></a>{% endfor %}
+  </div>
+</section>
